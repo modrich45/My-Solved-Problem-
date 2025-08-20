@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ 
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+ 
+    int t;
+    cin >> t;
+ 
+    while (t--) {
+       ll n,p;
+       cin>>n>>p;
+       string s;
+       cin>>s;
+       ll ans=1;
+       ll left=-1,right=-1;
+       for(int i=0;i<p-1;i++){
+        if(s[i]=='#'){
+            left=i;
+        }
+       }
+       
+       for(int i=n-1;i>p-1;i--){
+        if(s[i]=='#'){
+            right=i;
+        }
+       }
+       if(!(left==-1 && right==-1)  && left!=-1 && right==-1){
+        right=p;
+       }else if(!(left==-1 && right==-1)  && left==-1 && right!=-1){
+        left=p-2;
+       }else if(!(left==-1 && right==-1)  && left+1<=n-right){
+        left=p-2;
+       }else if(!(left==-1 && right==-1) && left+1>n-right){
+        right=p;
+       }
+    //    cout<<"Left :"<<left<<"right :"<<right<<endl;
+       if( (left==-1 && right==-1) || p==1 || p==n ){
+        cout<<ans<<"\n";
+       }else{
+        
+        cout<<ans+min(left+1,n-right)<<"\n";
+       }
+    }
+ 
+    return 0;
+}
